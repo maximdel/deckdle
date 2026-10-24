@@ -1,0 +1,15 @@
+{
+  "_note": "Cards released after RoyaleAPI's cr-api-data snapshot (Dec 2023). Added by hand; double-check stats in-game before using one in a deck.",
+  "cards": [
+    { "key": "little-prince", "name": "Little Prince", "elixir": 3, "type": "Troop", "rarity": "Champion" },
+    { "key": "goblinstein", "name": "Goblinstein", "elixir": 5, "type": "Troop", "rarity": "Champion" },
+    { "key": "boss-bandit", "name": "Boss Bandit", "elixir": 6, "type": "Troop", "rarity": "Champion" },
+    { "key": "goblin-machine", "name": "Goblin Machine", "elixir": 5, "type": "Troop", "rarity": "Legendary" },
+    { "key": "rune-giant", "name": "Rune Giant", "elixir": 4, "type": "Troop", "rarity": "Epic" },
+    { "key": "goblin-demolisher", "name": "Goblin Demolisher", "elixir": 4, "type": "Troop", "rarity": "Rare" },
+    { "key": "suspicious-bush", "name": "Suspicious Bush", "elixir": 2, "type": "Troop", "rarity": "Rare" },
+    { "key": "berserker", "name": "Berserker", "elixir": 2, "type": "Troop", "rarity": "Common" },
+    { "key": "goblin-curse", "name": "Goblin Curse", "elixir": 2, "type": "Spell", "rarity": "Epic" },
+    { "key": "void", "name": "Void", "elixir": 3, "type": "Spell", "rarity": "Epic" }
+  ]
+}
