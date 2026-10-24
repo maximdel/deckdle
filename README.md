@@ -1,4 +1,5 @@
 # Deckdle
+n**Play: https://deckdle.pages.dev**
 
 A daily fan-made puzzle for Clash Royale players. Every day there is one famous deck with 4 of its 8 cards hidden. Find them. Each wrong guess unlocks a hint about the hidden cards (elixir, then type, then rarity, then roughly when the deck was popular, then the deck's name). The 6th wrong guess ends the game.
 
@@ -46,6 +47,8 @@ Deckdle follows [Supercell's Fan Content Policy](https://supercell.com/en/fan-co
 - card images are shown unmodified (no blur, pixelation or cropping).
 
 ## Deploy (Cloudflare Pages, free)
+
+Live at https://deckdle.pages.dev. Every push to `main` is built and deployed automatically. Setup for reference:
 
 1. Create a GitHub repo `maximdel/deckdle` and push `main`.
 2. In the Cloudflare dashboard, go to Workers & Pages, then Create, then Pages, then Connect to Git, and pick the repo.
