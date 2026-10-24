@@ -1,5 +1,6 @@
 # Deckdle
-n**Play: https://deckdle.pages.dev**
+
+**Play: https://deckdle.pages.dev**
 
 A daily fan-made puzzle for Clash Royale players. Every day there is one famous deck with 4 of its 8 cards hidden. Find them. Each wrong guess unlocks a hint about the hidden cards (elixir, then type, then rarity, then roughly when the deck was popular, then the deck's name). The 6th wrong guess ends the game.
 
