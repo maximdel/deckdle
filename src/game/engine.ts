@@ -1,10 +1,10 @@
 import type { Puzzle } from "./puzzle";
 
-/** The 5th wrong guess ends the game. */
-export const MAX_MISSES = 5;
+/** The 6th wrong guess ends the game. */
+export const MAX_MISSES = 6;
 
 /** What each wrong guess unlocks, in order. */
-export const HINTS = ["elixir", "type", "rarity", "name"] as const;
+export const HINTS = ["elixir", "type", "rarity", "era", "name"] as const;
 export type Hint = (typeof HINTS)[number];
 
 export type GuessResult =

@@ -23,6 +23,7 @@ export function HelpModal({ open, onClose }: { open: boolean; onClose: () => voi
         </li>
         <li>⚔️ their type: troop, spell or building</li>
         <li>💎 their rarity</li>
+        <li>📅 roughly when the deck was popular</li>
         <li>🏷️ the name of the deck</li>
       </ol>
       <p className="muted">The average elixir of the full deck is shown from the start. A new deck comes every day at midnight (Brussels time).</p>

@@ -33,7 +33,12 @@ export function loadGuesses(puzzle: number): string[] {
 export const saveGuesses = (puzzle: number, guesses: string[]) => write("game", { puzzle, guesses });
 
 export function loadStats(): Stats {
-  return { ...emptyStats(), ...read<Stats>("stats") };
+  const empty = emptyStats();
+  const saved = read<Stats>("stats");
+  if (!saved) return empty;
+  // Keep the distribution the right length if the miss limit ever changes.
+  const distribution = empty.distribution.map((_, i) => saved.distribution?.[i] ?? 0);
+  return { ...empty, ...saved, distribution };
 }
 
 export const saveStats = (stats: Stats) => write("stats", stats);

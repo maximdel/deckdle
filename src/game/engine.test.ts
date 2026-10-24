@@ -6,7 +6,7 @@ import { emptyStats, liveStreak, recordResult } from "./stats";
 
 const puzzle: Puzzle = {
   number: 7,
-  deck: { id: "hog-26", name: "Hog 2.6 Cycle", cards: [] },
+  deck: { id: "hog-26", name: "Hog 2.6 Cycle", era: 2017, addedOn: 1, cards: [] },
   cards: ["hog-rider", "musketeer", "cannon", "ice-golem", "ice-spirit", "skeletons", "fireball", "the-log"],
   hidden: [0, 2, 5, 7], // hog-rider, cannon, skeletons, the-log
 };
@@ -46,10 +46,11 @@ describe("deriveState", () => {
   it("unlocks hints in order with each miss", () => {
     expect([...deriveState(puzzle, ["golem"]).hints]).toEqual(["elixir"]);
     expect([...deriveState(puzzle, ["golem", "pekka"]).hints]).toEqual(["elixir", "type"]);
-    expect([...deriveState(puzzle, ["golem", "pekka", "cannon", "zap", "miner"]).hints]).toEqual([
+    expect([...deriveState(puzzle, ["golem", "pekka", "cannon", "zap", "miner", "rage"]).hints]).toEqual([
       "elixir",
       "type",
       "rarity",
+      "era",
       "name",
     ]);
   });
@@ -62,7 +63,7 @@ describe("deriveState", () => {
   });
 
   it(`is lost after ${MAX_MISSES} misses`, () => {
-    const s = deriveState(puzzle, ["cannon", "golem", "pekka", "zap", "miner", "rage"]);
+    const s = deriveState(puzzle, ["cannon", "golem", "pekka", "zap", "miner", "rage", "bats"]);
     expect(s.status).toBe("lost");
     expect(s.found.size).toBe(1);
   });
@@ -75,7 +76,7 @@ describe("shareText", () => {
   });
 
   it("marks a lost game", () => {
-    const text = shareText(puzzle, ["cannon", "golem", "pekka", "zap", "miner", "rage"], "u");
+    const text = shareText(puzzle, ["cannon", "golem", "pekka", "zap", "miner", "rage", "bats"], "u");
     expect(text.split("\n")[0]).toBe("Deckdle #7 · 1/4 found ❌");
   });
 
@@ -117,8 +118,8 @@ describe("stats", () => {
     s = recordResult(s, 1, true, 0);
     s = recordResult(s, 2, true, 2);
     expect(s.currentStreak).toBe(2);
-    expect(s.distribution).toEqual([1, 0, 1, 0, 0]);
-    s = recordResult(s, 3, false, 5);
+    expect(s.distribution).toEqual([1, 0, 1, 0, 0, 0]);
+    s = recordResult(s, 3, false, 6);
     expect(s).toMatchObject({ played: 3, wins: 2, currentStreak: 0, maxStreak: 2 });
   });
 

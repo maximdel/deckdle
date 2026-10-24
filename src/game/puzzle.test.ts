@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { DECKS } from "../data/decks";
 import { CARD_BY_KEY } from "./cards";
 import { dateKey, dayNumber, msUntilNextPuzzle } from "./date";
-import { getPuzzle, HIDDEN_COUNT } from "./puzzle";
+import { deckSchedule, getPuzzle, HIDDEN_COUNT } from "./puzzle";
+import type { Deck } from "../data/decks";
 
 describe("deck data", () => {
   it.each(DECKS.map((d) => [d.id, d] as const))("%s has 8 unique, known cards", (_, deck) => {
@@ -68,6 +69,44 @@ describe("getPuzzle", () => {
   it("never repeats a deck on consecutive days", () => {
     for (let n = 1; n < DECKS.length * 20; n++) {
       expect(getPuzzle(n).deck.id).not.toBe(getPuzzle(n + 1).deck.id);
+    }
+  });
+});
+
+describe("deckSchedule (adding decks later)", () => {
+  const make = (id: string, extra: Partial<Deck> = {}): Deck => ({ id, name: id, era: 2020, addedOn: 1, cards: [], ...extra });
+  const base = Array.from({ length: 10 }, (_, i) => make(`d${i}`));
+
+  it("keeps every past day the same when a deck is added for a future day", () => {
+    const before = deckSchedule(100, base);
+    const after = deckSchedule(100, [...base, make("new", { addedOn: 61 })]);
+    expect(after.slice(0, 60)).toEqual(before.slice(0, 60));
+    expect(after.slice(0, 60)).not.toContain("new");
+    expect(after).toContain("new");
+  });
+
+  it("never shows a deck before its addedOn day or after it is retired", () => {
+    const decks = [...base, make("late", { addedOn: 25 }), make("gone", { retiredFrom: 15 })];
+    const schedule = deckSchedule(200, decks);
+    schedule.forEach((id, i) => {
+      const day = i + 1;
+      if (id === "late") expect(day).toBeGreaterThanOrEqual(25);
+      if (id === "gone") expect(day).toBeLessThan(15);
+    });
+  });
+
+  it("retiring a deck does not change days before the retirement", () => {
+    const before = deckSchedule(100, base);
+    const after = deckSchedule(100, base.map((d) => (d.id === "d3" ? { ...d, retiredFrom: 50 } : d)));
+    expect(after.slice(0, 49)).toEqual(before.slice(0, 49));
+    expect(after.slice(49)).not.toContain("d3");
+  });
+
+  it("every real deck has a sensible era and addedOn", () => {
+    for (const d of DECKS) {
+      expect(d.era).toBeGreaterThanOrEqual(2016);
+      expect(d.era).toBeLessThanOrEqual(new Date().getFullYear());
+      expect(d.addedOn).toBeGreaterThanOrEqual(1);
     }
   });
 });

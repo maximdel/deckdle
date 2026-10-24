@@ -12,7 +12,8 @@ import { getPuzzle } from "./game/puzzle";
 import { liveStreak, recordResult } from "./game/stats";
 import * as storage from "./game/storage";
 
-const todayNumber = () => dayNumber(dateKey(new Date()));
+// Never below #1, even if the device clock is set before launch day.
+const todayNumber = () => Math.max(1, dayNumber(dateKey(new Date())));
 const siteUrl = () => `${location.origin}${import.meta.env.BASE_URL}`;
 
 const INVALID_MESSAGE = {
@@ -106,6 +107,8 @@ export default function App() {
   const misses = guesses.filter((g) => !puzzle.hidden.includes(puzzle.cards.indexOf(g)));
   const livesLeft = MAX_MISSES - state.misses;
   const showName = state.hints.has("name") || over;
+  const showEra = state.hints.has("era");
+  const boardTitle = showName ? puzzle.deck.name : showEra ? `Popular around ${puzzle.deck.era}` : "Mystery deck";
 
   return (
     <div className="app">
@@ -129,7 +132,9 @@ export default function App() {
         <section className={`board${shake ? " is-shaking" : ""}`}>
           <div className="board__head">
             <span className="board__num">#{puzzle.number}</span>
-            <span className={`board__name${showName ? " is-revealed" : ""}`}>{showName ? puzzle.deck.name : "Mystery deck"}</span>
+            <span key={boardTitle} className={`board__name${showName || showEra ? " is-revealed" : ""}`}>
+              {boardTitle}
+            </span>
             <span className="board__avg" title="Average elixir of the full deck">
               <ElixirDrop size={16} /> {avg}
             </span>
@@ -229,10 +234,10 @@ export default function App() {
 }
 
 function resultTitle(misses: number): string {
-  return ["Flawless!", "Excellent!", "Well played!", "Nice!", "Phew, close one!"][misses] ?? "Well played!";
+  return ["Flawless!", "Excellent!", "Great!", "Well played!", "Nice!", "Phew, close one!"][misses] ?? "Well played!";
 }
 
-const NEXT_HINT = ["their elixir cost", "their card type", "their rarity", "the deck's name"];
+const NEXT_HINT = ["their elixir cost", "their card type", "their rarity", "when the deck was popular", "the deck's name"];
 
 function NextHint({ misses }: { misses: number }) {
   const next = NEXT_HINT[misses];

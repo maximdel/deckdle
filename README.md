@@ -1,6 +1,6 @@
 # Deckdle
 
-A daily fan-made puzzle for Clash Royale players. Every day there is one famous deck with 4 of its 8 cards hidden. Find them. Each wrong guess unlocks a hint about the hidden cards (elixir, then type, then rarity, then the deck's name). The 5th wrong guess ends the game.
+A daily fan-made puzzle for Clash Royale players. Every day there is one famous deck with 4 of its 8 cards hidden. Find them. Each wrong guess unlocks a hint about the hidden cards (elixir, then type, then rarity, then roughly when the deck was popular, then the deck's name). The 6th wrong guess ends the game.
 
 Everyone gets the same deck on the same day. The day rolls over at midnight, Brussels time.
 
@@ -15,22 +15,26 @@ npm run build    # static site in dist/
 
 ## How it works
 
-- `src/game/puzzle.ts`: picks the day's deck. Every deck is played once, in a shuffled order, before any repeats, and never two days in a row.
+- `src/game/puzzle.ts`: picks the day's deck. Every deck is played once, in a shuffled order, before any repeats, and never two days in a row. Adding decks later doesn't change past days.
 - `src/game/engine.ts`: checks guesses, unlocks hints, builds the share text.
 - `src/game/date.ts`: puzzle number and countdown in `Europe/Brussels` (handles daylight saving).
 - `src/game/stats.ts` + `storage.ts`: stats and streak in `localStorage`. No backend, no accounts.
 - `src/data/decks.ts`: the deck list. Add decks here; a test checks every deck has 8 unique, known cards.
 
-Adding or removing decks changes the order of future puzzles, so do it before launch or accept a reshuffle.
-
 ## Card data
 
-`npm run data` rebuilds `src/data/cards.json` and downloads card images to `public/cards/` from:
+`npm run data` rebuilds `src/data/cards.json` and downloads any missing card images to `public/cards/`.
 
-- [RoyaleAPI/cr-api-data](https://github.com/RoyaleAPI/cr-api-data): card list and stats. It was last updated in December 2023.
-- [RoyaleAPI/cr-api-assets](https://github.com/RoyaleAPI/cr-api-assets): card images, used unmodified.
+- **With an official API key** (recommended, always up to date):
+  `$env:CR_API_TOKEN="your-key"; npm run data`
+  Get the key at [developer.clashroyale.com](https://developer.clashroyale.com) for your current IP. The card type comes from the card ID (26… troop, 27… building, 28… spell).
+- **Without a key**, it falls back to [RoyaleAPI/cr-api-data](https://github.com/RoyaleAPI/cr-api-data). That data was last updated in December 2023, so newer cards are added by hand in `scripts/extra-cards.json`.
 
-Cards released after December 2023 are added by hand in `scripts/extra-cards.json`. Check their stats in-game before using one in a deck. Event-only cards (Super cards, Terry, Party cards, Santa Hog Rider) are left out.
+Card images come from the official API or [RoyaleAPI/cr-api-assets](https://github.com/RoyaleAPI/cr-api-assets) and are used unmodified. Event-only cards (Super cards, Terry, Party cards, Santa Hog Rider) are left out.
+
+## Adding decks
+
+Append a deck to `src/data/decks.ts` with `addedOn` set to a future puzzle number. Past puzzles never change, because the schedule replays day by day and a new deck only joins once its day has come. Don't delete decks that have been played: set `retiredFrom` instead. `npm test` checks every deck.
 
 ## Fan Content Policy
 
