@@ -47,4 +47,7 @@ export const DECKS: Deck[] = [
   { id: "hog-exe-nado", name: "Hog Executioner Tornado", era: 2018, addedOn: 1, cards: ["hog-rider", "executioner", "tornado", "rocket", "knight", "electro-wizard", "ice-spirit", "the-log"] },
   { id: "graveyard-freeze", name: "Graveyard Freeze", era: 2018, addedOn: 1, cards: ["graveyard", "freeze", "ice-wizard", "valkyrie", "baby-dragon", "barbarian-barrel", "poison", "knight"] },
   { id: "phoenix-loon", name: "Phoenix LavaLoon", era: 2022, addedOn: 1, cards: ["lava-hound", "balloon", "phoenix", "skeleton-dragons", "guards", "tombstone", "fireball", "zap"] },
+  // Added after launch (puzzle #2 was live), so they start at #3.
+  { id: "golem-pump", name: "Golem Elixir Pump", era: 2018, addedOn: 3, cards: ["golem", "elixir-collector", "night-witch", "baby-dragon", "mega-minion", "lightning", "tornado", "zap"] },
+  { id: "royal-hogs-eq", name: "Royal Hogs Earthquake", era: 2021, addedOn: 3, cards: ["royal-hogs", "earthquake", "flying-machine", "hunter", "goblin-cage", "zappies", "royal-delivery", "the-log"] },
 ];

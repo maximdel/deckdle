@@ -338,7 +338,7 @@
   {
     "key": "goblin-hut",
     "name": "Goblin Hut",
-    "elixir": 5,
+    "elixir": 4,
     "type": "Building",
     "rarity": "Rare"
   },
@@ -525,6 +525,13 @@
     "rarity": "Rare"
   },
   {
+    "key": "minion-giant",
+    "name": "Minion Giant",
+    "elixir": 4,
+    "type": "Troop",
+    "rarity": "Rare"
+  },
+  {
     "key": "minion-horde",
     "name": "Minion Horde",
     "elixir": 5,
@@ -623,13 +630,6 @@
     "rarity": "Epic"
   },
   {
-    "key": "raging-prince",
-    "name": "Raging Prince",
-    "elixir": 5,
-    "type": "Troop",
-    "rarity": "Epic"
-  },
-  {
     "key": "ram-rider",
     "name": "Ram Rider",
     "elixir": 5,
@@ -649,6 +649,13 @@
     "elixir": 6,
     "type": "Spell",
     "rarity": "Rare"
+  },
+  {
+    "key": "ronin",
+    "name": "Ronin",
+    "elixir": 5,
+    "type": "Troop",
+    "rarity": "Legendary"
   },
   {
     "key": "royal-delivery",
@@ -742,6 +749,13 @@
     "rarity": "Common"
   },
   {
+    "key": "spirit-empress",
+    "name": "Spirit Empress",
+    "elixir": 6,
+    "type": "Spell",
+    "rarity": "Legendary"
+  },
+  {
     "key": "suspicious-bush",
     "name": "Suspicious Bush",
     "elixir": 2,
@@ -791,9 +805,16 @@
     "rarity": "Rare"
   },
   {
+    "key": "vines",
+    "name": "Vines",
+    "elixir": 3,
+    "type": "Spell",
+    "rarity": "Epic"
+  },
+  {
     "key": "void",
     "name": "Void",
-    "elixir": 3,
+    "elixir": 5,
     "type": "Spell",
     "rarity": "Epic"
   },

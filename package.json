@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc -b",
-    "data": "node scripts/refresh-data.mjs"
+    "data": "node scripts/refresh-data.mjs",
+    "decks:suggest": "node scripts/suggest-decks.mjs"
   },
   "dependencies": {
     "@fontsource/lilita-one": "^5.3.0",

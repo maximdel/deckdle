@@ -59,11 +59,21 @@ describe("getPuzzle", () => {
   });
 
   it("plays every deck once before any repeats", () => {
+    // The launch decks fill the first bag; after that every bag holds all decks.
+    const launch = DECKS.filter((d) => d.addedOn === 1).length;
+    const first = Array.from({ length: launch }, (_, i) => getPuzzle(i + 1).deck.id);
+    expect(new Set(first).size).toBe(launch);
     for (let cycle = 0; cycle < 5; cycle++) {
-      const start = cycle * DECKS.length + 1;
+      const start = launch + cycle * DECKS.length + 1;
       const ids = Array.from({ length: DECKS.length }, (_, i) => getPuzzle(start + i).deck.id);
       expect(new Set(ids).size).toBe(DECKS.length);
     }
+  });
+
+  it("keeps puzzles #1 and #2 as they were at launch", () => {
+    const launchDecks = DECKS.filter((d) => d.addedOn === 1);
+    expect(getPuzzle(1).deck.id).toBe(getPuzzle(1, launchDecks).deck.id);
+    expect(getPuzzle(2).deck.id).toBe(getPuzzle(2, launchDecks).deck.id);
   });
 
   it("never repeats a deck on consecutive days", () => {

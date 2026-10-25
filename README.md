@@ -36,6 +36,8 @@ Card images come from the official API or [RoyaleAPI/cr-api-assets](https://gith
 
 ## Adding decks
 
+To find decks from the current meta, run `$env:CR_API_TOKEN="your-key"; npm run decks:suggest`. It lists the most-used decks among the top Path of Legends players (it doesn't edit anything). Pick the ones you like and give them a name.
+
 Append a deck to `src/data/decks.ts` with `addedOn` set to a future puzzle number. Past puzzles never change, because the schedule replays day by day and a new deck only joins once its day has come. Don't delete decks that have been played: set `retiredFrom` instead. `npm test` checks every deck.
 
 ## Fan Content Policy
