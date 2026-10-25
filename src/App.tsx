@@ -209,6 +209,7 @@ export default function App() {
           </a>
           .
         </p>
+        <p>Your stats stay on your device. We count anonymous visits with Cloudflare Web Analytics (no cookies).</p>
       </footer>
 
       <div className={`toast${toast ? " is-visible" : ""}`} role="status" aria-live="polite">
